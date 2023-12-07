@@ -63,5 +63,10 @@ namespace BattleShip.Models
                 OnPropertyChanged(nameof(PosY));
             }
         }
+        public Ship()
+        {
+            _posX = new int[Size];
+            _posY = new int[Size];
+        }
     }
 }

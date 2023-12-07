@@ -10,19 +10,19 @@ namespace BattleShip
         private Button startGameButton;
 
         private Player player;
-        private Board board;
+        private Player computer;
         public Button StartGameButton { get => startGameButton; }
         public MainForm()
         {
-            board = new Board();
-            player = new Player(board);
+            player = new Player(new Board());
+            computer = new Player(new Board());
             InitializeComponent();
             DoubleBuffered = true;
         }
         private void startScreenButton_Click(object sender, EventArgs e)
         {
             RenderScreen();
-            shipsSetupUserControl = new ShipsSetupUserControl(this, player, board);
+            shipsSetupUserControl = new ShipsSetupUserControl(this, player, computer);
             Controls.Add(shipsSetupUserControl);
             shipsSetupUserControl.Show();
         }
@@ -46,7 +46,7 @@ namespace BattleShip
             startGameButton.Click += (s, e) =>
             {
                 Controls.Clear();
-                gamePlayUserControl = new GamePlayUserControl(player, board);
+                gamePlayUserControl = new GamePlayUserControl(player, computer);
                 Controls.Add(gamePlayUserControl);
                 gamePlayUserControl.Show();
             };

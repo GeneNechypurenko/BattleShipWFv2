@@ -9,6 +9,7 @@ namespace BattleShip.Models
 {
     public class Player : INotifyPropertyChanged
     {
+        public int ShipCount { get; } = 10;
         private int _lincoreSet = 1;
         public int LincoreSet
         {
@@ -59,7 +60,7 @@ namespace BattleShip.Models
                 OnPropertyChanged(nameof(Board));
             }
         }
-        public Player(Board board) => board = new Board();
+        public Player(Board board) => Board = board;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
