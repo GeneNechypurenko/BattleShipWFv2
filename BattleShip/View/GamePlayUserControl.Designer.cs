@@ -41,7 +41,7 @@
             // computerFlowLayoutPanel
             // 
             computerFlowLayoutPanel.BackColor = Color.Crimson;
-            computerFlowLayoutPanel.Location = new Point(390, 60);
+            computerFlowLayoutPanel.Location = new Point(390, 50);
             computerFlowLayoutPanel.Name = "computerFlowLayoutPanel";
             computerFlowLayoutPanel.Size = new Size(300, 300);
             computerFlowLayoutPanel.TabIndex = 2;
@@ -49,7 +49,7 @@
             // playerFlowLayoutPanel
             // 
             playerFlowLayoutPanel.BackColor = Color.LimeGreen;
-            playerFlowLayoutPanel.Location = new Point(50, 60);
+            playerFlowLayoutPanel.Location = new Point(50, 50);
             playerFlowLayoutPanel.Name = "playerFlowLayoutPanel";
             playerFlowLayoutPanel.Size = new Size(300, 300);
             playerFlowLayoutPanel.TabIndex = 3;

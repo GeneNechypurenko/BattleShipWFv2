@@ -55,14 +55,14 @@ namespace BattleShip.View
         {
             Graphics g = e.Graphics;
 
-            BoardRenderer.DrawBorderTopString(20, 30, Brushes.LimeGreen, e.Graphics, this.Font);
+            BoardRenderer.DrawBorderTopString(20, 20, Brushes.LimeGreen, e.Graphics, this.Font);
             BoardRenderer.AddPictureBoxes(playerFlowLayoutPanel, Color.LimeGreen, CellPictureBox_Click);
-            BoardRenderer.DrawBorderSideString(20, 30, Brushes.LimeGreen, e.Graphics, this.Font);
+            BoardRenderer.DrawBorderSideString(20, 20, Brushes.LimeGreen, e.Graphics, this.Font);
             BoardRenderer.SetPlayerBoard(player, playerFlowLayoutPanel, Color.DarkSlateGray);
 
-            BoardRenderer.DrawBorderTopString(360, 30, Brushes.Crimson, e.Graphics, this.Font);
+            BoardRenderer.DrawBorderTopString(360, 20, Brushes.Crimson, e.Graphics, this.Font);
             BoardRenderer.AddPictureBoxes(computerFlowLayoutPanel, Color.Crimson, CellPictureBox_Click);
-            BoardRenderer.DrawBorderSideString(690, 30, Brushes.Crimson, e.Graphics, this.Font);
+            BoardRenderer.DrawBorderSideString(690, 20, Brushes.Crimson, e.Graphics, this.Font);
             //BoardRenderer.SetPlayerBoard(computer, computerFlowLayoutPanel, Color.DarkSlateGray);
         }
         private void CellPictureBox_Click(object? sender, EventArgs e)
