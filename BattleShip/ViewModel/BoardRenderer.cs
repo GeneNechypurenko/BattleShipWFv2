@@ -1,8 +1,10 @@
 ﻿using BattleShip.Models;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,7 +55,7 @@ namespace BattleShip.ViewModel
                 g.DrawString(letter.ToString(), font, color, new PointF(xOffset + _cellSize / 4, yOffset + _cellSize / 4));
             }
         }
-        public static void SetPlayerBoard(Player player, FlowLayoutPanel playerFlowLayoutPanel)
+        public static void SetPlayerBoard(Player player, FlowLayoutPanel playerFlowLayoutPanel, Color color)
         {
             for (int i = 0; i < _cells; i++)
             {
@@ -67,11 +69,50 @@ namespace BattleShip.ViewModel
                         {
                             if (playerFlowLayoutPanel.Controls[index] is PictureBox cellPictureBox)
                             {
-                                cellPictureBox.BackColor = Color.Black;
+                                cellPictureBox.BackColor = color;
                             }
                         }
                     }
                 }
+            }
+        }
+        public static void Shot(Player player, PictureBox clickedPictureBox, Color markColor, Color restoreBoardColor)
+        {
+            string[] coordinates = clickedPictureBox.Tag.ToString().Split(':');
+            Font font = new Font("Segoe UI", 20, FontStyle.Bold);
+
+            if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int i) && int.TryParse(coordinates[1], out int j))
+            {
+                if (player.Board.Board2d[i, j] == 1)
+                {
+                    clickedPictureBox.Image = new Bitmap(clickedPictureBox.Width, clickedPictureBox.Height);
+                    using (Graphics g = Graphics.FromImage(clickedPictureBox.Image))
+                    {
+                        using (Brush brush = new SolidBrush(markColor))
+                        {
+                            clickedPictureBox.BackColor = restoreBoardColor;
+                            float x = (clickedPictureBox.Width - g.MeasureString("X", font).Width) / 2;
+                            float y = (clickedPictureBox.Height - g.MeasureString("X", font).Height) / 2;
+                            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                            g.DrawString("X", font, brush, new PointF(x, y));
+                        }
+                    }
+                }
+                else if (player.Board.Board2d[i, j] == 0)
+                {
+                    clickedPictureBox.Image = new Bitmap(clickedPictureBox.Width, clickedPictureBox.Height);
+                    using (Graphics g = Graphics.FromImage(clickedPictureBox.Image))
+                    {
+                        using (Brush brush = new SolidBrush(markColor))
+                        {
+                            float x = (clickedPictureBox.Width - g.MeasureString("O", font).Width) / 2;
+                            float y = (clickedPictureBox.Height - g.MeasureString("O", font).Height) / 2;
+                            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                            g.DrawString("O", font, brush, new PointF(x, y));
+                        }
+                    }
+                }
+                player.Board.Board2d[i, j] = 2;
             }
         }
     }

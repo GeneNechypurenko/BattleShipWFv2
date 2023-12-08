@@ -48,25 +48,43 @@ namespace BattleShip.ViewModel
 
             while (currentShip < computer.ShipCount)
             {
-                int x;
-                int y;
+                int startX;
+                int startY;
                 bool isVertical;
 
                 do
                 {
-                    x = rand.Next(0, 9);
-                    y = rand.Next(0, 9);
-                    isVertical = rand.Next(0, 1) == 0 ? false : true;
-                } while (computer.Board.IsOccupiedCell[x,y]);
+                    isVertical = rand.Next(0, 2) == 0;
+                    startX = rand.Next(0, 10 - (isVertical ? computer.Board.Ships[currentShip].Size : 0));
+                    startY = rand.Next(0, 10 - (isVertical ? 0 : computer.Board.Ships[currentShip].Size));
+
+                } while (
+                (isVertical && IsOverlap(computer.Board, startX, startY, computer.Board.Ships[currentShip].Size, 1)) ||
+                (!isVertical && IsOverlap(computer.Board, startX, startY, 1, computer.Board.Ships[currentShip].Size)));
 
                 computer.Board.Ships[currentShip].IsVertical = isVertical;
 
-                SetShipPosXY(computer, computer.Board.Ships[currentShip], x, y);
-                SetShipOnBoard(computer, computer.Board.Ships[currentShip], x, y);
+                SetShipPosXY(computer, computer.Board.Ships[currentShip], startX, startY);
+                SetShipOnBoard(computer, computer.Board.Ships[currentShip], startX, startY);
 
                 currentShip++;
             }
         }
+        private static bool IsOverlap(Board board, int startX, int startY, int width, int height)
+        {
+            for (int i = startX; i < startX + width; i++)
+            {
+                for (int j = startY; j < startY + height; j++)
+                {
+                    if (board.IsOccupiedCell[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public void SetPlayerShip(Player player, PictureBox? clickedPictureBox)
         {
             if (shipSetup.LincoreRadioButton.Checked && player.LincoreSet != 0)
@@ -296,7 +314,7 @@ namespace BattleShip.ViewModel
                     {
                         foreach (Control control in shipSetup.CellsFlowLayoutPanel.Controls)
                         {
-                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.Black; }
+                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.DarkSlateGray; }
                         }
                         break;
                     }
@@ -304,8 +322,8 @@ namespace BattleShip.ViewModel
                     {
                         foreach (Control control in shipSetup.CellsFlowLayoutPanel.Controls)
                         {
-                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i + 1}:{j}") { nextCellPictureBox.BackColor = Color.Black; }
+                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i + 1}:{j}") { nextCellPictureBox.BackColor = Color.DarkSlateGray; }
                         }
                         break;
                     }
@@ -313,9 +331,9 @@ namespace BattleShip.ViewModel
                     {
                         foreach (Control control in shipSetup.CellsFlowLayoutPanel.Controls)
                         {
-                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i + 1}:{j}") { nextCellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox2 && nextCellPictureBox2.Tag.ToString() == $"{i + 2}:{j}") { nextCellPictureBox2.BackColor = Color.Black; }
+                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i + 1}:{j}") { nextCellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox2 && nextCellPictureBox2.Tag.ToString() == $"{i + 2}:{j}") { nextCellPictureBox2.BackColor = Color.DarkSlateGray; }
                         }
                         break;
                     }
@@ -323,10 +341,10 @@ namespace BattleShip.ViewModel
                     {
                         foreach (Control control in shipSetup.CellsFlowLayoutPanel.Controls)
                         {
-                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i + 1}:{j}") { nextCellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox2 && nextCellPictureBox2.Tag.ToString() == $"{i + 2}:{j}") { nextCellPictureBox2.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox3 && nextCellPictureBox3.Tag.ToString() == $"{i + 3}:{j}") { nextCellPictureBox3.BackColor = Color.Black; }
+                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i + 1}:{j}") { nextCellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox2 && nextCellPictureBox2.Tag.ToString() == $"{i + 2}:{j}") { nextCellPictureBox2.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox3 && nextCellPictureBox3.Tag.ToString() == $"{i + 3}:{j}") { nextCellPictureBox3.BackColor = Color.DarkSlateGray; }
                         }
                         break;
                     }
@@ -340,7 +358,7 @@ namespace BattleShip.ViewModel
                     {
                         foreach (Control control in shipSetup.CellsFlowLayoutPanel.Controls)
                         {
-                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.Black; }
+                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.DarkSlateGray; }
                         }
                         break;
                     }
@@ -348,8 +366,8 @@ namespace BattleShip.ViewModel
                     {
                         foreach (Control control in shipSetup.CellsFlowLayoutPanel.Controls)
                         {
-                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i}:{j + 1}") { nextCellPictureBox.BackColor = Color.Black; }
+                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i}:{j + 1}") { nextCellPictureBox.BackColor = Color.DarkSlateGray; }
                         }
                         break;
                     }
@@ -357,9 +375,9 @@ namespace BattleShip.ViewModel
                     {
                         foreach (Control control in shipSetup.CellsFlowLayoutPanel.Controls)
                         {
-                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i}:{j + 1}") { nextCellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox2 && nextCellPictureBox2.Tag.ToString() == $"{i}:{j + 2}") { nextCellPictureBox2.BackColor = Color.Black; }
+                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i}:{j + 1}") { nextCellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox2 && nextCellPictureBox2.Tag.ToString() == $"{i}:{j + 2}") { nextCellPictureBox2.BackColor = Color.DarkSlateGray; }
                         }
                         break;
                     }
@@ -367,10 +385,10 @@ namespace BattleShip.ViewModel
                     {
                         foreach (Control control in shipSetup.CellsFlowLayoutPanel.Controls)
                         {
-                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i}:{j + 1}") { nextCellPictureBox.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox2 && nextCellPictureBox2.Tag.ToString() == $"{i}:{j + 2}") { nextCellPictureBox2.BackColor = Color.Black; }
-                            else if (control is PictureBox nextCellPictureBox3 && nextCellPictureBox3.Tag.ToString() == $"{i}:{j + 3}") { nextCellPictureBox3.BackColor = Color.Black; }
+                            if (control is PictureBox cellPictureBox && cellPictureBox.Tag.ToString() == $"{i}:{j}") { cellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox && nextCellPictureBox.Tag.ToString() == $"{i}:{j + 1}") { nextCellPictureBox.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox2 && nextCellPictureBox2.Tag.ToString() == $"{i}:{j + 2}") { nextCellPictureBox2.BackColor = Color.DarkSlateGray; }
+                            else if (control is PictureBox nextCellPictureBox3 && nextCellPictureBox3.Tag.ToString() == $"{i}:{j + 3}") { nextCellPictureBox3.BackColor = Color.DarkSlateGray; }
                         }
                         break;
                     }

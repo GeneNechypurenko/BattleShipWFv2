@@ -9,6 +9,17 @@ namespace BattleShip.Models
 {
     public class Player : INotifyPropertyChanged
     {
+        public bool IsTurn { get; set; }
+        //private bool _isTurn;
+        //public bool IsTurn
+        //{
+        //    get => _isTurn;
+        //    set
+        //    {
+        //        _isTurn = value;
+        //        OnPropertyChanged(nameof(IsTurn));
+        //    }
+        //}
         public int ShipCount { get; } = 10;
         private int _lincoreSet = 1;
         public int LincoreSet

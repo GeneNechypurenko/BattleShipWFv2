@@ -55,7 +55,7 @@
             startScreenLabel.ForeColor = Color.Ivory;
             startScreenLabel.Location = new Point(0, 0);
             startScreenLabel.Name = "startScreenLabel";
-            startScreenLabel.Padding = new Padding(100, 100, 100, 100);
+            startScreenLabel.Padding = new Padding(100);
             startScreenLabel.Size = new Size(742, 344);
             startScreenLabel.TabIndex = 0;
             startScreenLabel.Text = "BATTLE SHIP";
@@ -79,7 +79,7 @@
             startScreenButton.Font = new Font("Bahnschrift Condensed", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             startScreenButton.ForeColor = Color.Ivory;
             startScreenButton.Location = new Point(0, 0);
-            startScreenButton.Margin = new Padding(10, 10, 10, 10);
+            startScreenButton.Margin = new Padding(10);
             startScreenButton.Name = "startScreenButton";
             startScreenButton.Size = new Size(742, 59);
             startScreenButton.TabIndex = 0;
@@ -98,7 +98,7 @@
             ForeColor = Color.Ivory;
             MaximizeBox = false;
             Name = "MainForm";
-            Opacity = 0.9D;
+            Opacity = 0.98D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Battle Ship";
             startScreenPanel.ResumeLayout(false);

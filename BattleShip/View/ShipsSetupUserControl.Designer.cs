@@ -35,6 +35,10 @@
             fregateRadioButton = new RadioButton();
             lincoreRadioButton = new RadioButton();
             groupBox1 = new GroupBox();
+            briggSetLabel = new Label();
+            corvetteSetLabel = new Label();
+            fregateSetLabel = new Label();
+            lincoreSetLabel = new Label();
             label1 = new Label();
             infoLabel4 = new Label();
             infoLabel3 = new Label();
@@ -44,10 +48,6 @@
             shipSelectedLabel = new Label();
             notificationLabel = new Label();
             cellsFlowLayoutPanel = new FlowLayoutPanel();
-            lincoreSetLabel = new Label();
-            fregateSetLabel = new Label();
-            corvetteSetLabel = new Label();
-            briggSetLabel = new Label();
             fleetGroupBox.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -159,6 +159,38 @@
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             // 
+            // briggSetLabel
+            // 
+            briggSetLabel.AutoSize = true;
+            briggSetLabel.Location = new Point(80, 269);
+            briggSetLabel.Name = "briggSetLabel";
+            briggSetLabel.Size = new Size(0, 24);
+            briggSetLabel.TabIndex = 11;
+            // 
+            // corvetteSetLabel
+            // 
+            corvetteSetLabel.AutoSize = true;
+            corvetteSetLabel.Location = new Point(80, 245);
+            corvetteSetLabel.Name = "corvetteSetLabel";
+            corvetteSetLabel.Size = new Size(0, 24);
+            corvetteSetLabel.TabIndex = 10;
+            // 
+            // fregateSetLabel
+            // 
+            fregateSetLabel.AutoSize = true;
+            fregateSetLabel.Location = new Point(80, 221);
+            fregateSetLabel.Name = "fregateSetLabel";
+            fregateSetLabel.Size = new Size(0, 24);
+            fregateSetLabel.TabIndex = 9;
+            // 
+            // lincoreSetLabel
+            // 
+            lincoreSetLabel.AutoSize = true;
+            lincoreSetLabel.Location = new Point(80, 197);
+            lincoreSetLabel.Name = "lincoreSetLabel";
+            lincoreSetLabel.Size = new Size(0, 24);
+            lincoreSetLabel.TabIndex = 8;
+            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -231,43 +263,12 @@
             // 
             // cellsFlowLayoutPanel
             // 
+            cellsFlowLayoutPanel.BackColor = Color.LimeGreen;
             cellsFlowLayoutPanel.Location = new Point(220, 30);
             cellsFlowLayoutPanel.Margin = new Padding(0);
             cellsFlowLayoutPanel.Name = "cellsFlowLayoutPanel";
             cellsFlowLayoutPanel.Size = new Size(300, 300);
             cellsFlowLayoutPanel.TabIndex = 2;
-            // 
-            // lincoreSetLabel
-            // 
-            lincoreSetLabel.AutoSize = true;
-            lincoreSetLabel.Location = new Point(80, 197);
-            lincoreSetLabel.Name = "lincoreSetLabel";
-            lincoreSetLabel.Size = new Size(0, 24);
-            lincoreSetLabel.TabIndex = 8;
-            // 
-            // fregateSetLabel
-            // 
-            fregateSetLabel.AutoSize = true;
-            fregateSetLabel.Location = new Point(80, 221);
-            fregateSetLabel.Name = "fregateSetLabel";
-            fregateSetLabel.Size = new Size(0, 24);
-            fregateSetLabel.TabIndex = 9;
-            // 
-            // corvetteSetLabel
-            // 
-            corvetteSetLabel.AutoSize = true;
-            corvetteSetLabel.Location = new Point(80, 245);
-            corvetteSetLabel.Name = "corvetteSetLabel";
-            corvetteSetLabel.Size = new Size(0, 24);
-            corvetteSetLabel.TabIndex = 10;
-            // 
-            // briggSetLabel
-            // 
-            briggSetLabel.AutoSize = true;
-            briggSetLabel.Location = new Point(80, 269);
-            briggSetLabel.Name = "briggSetLabel";
-            briggSetLabel.Size = new Size(0, 24);
-            briggSetLabel.TabIndex = 11;
             // 
             // ShipsSetupUserControl
             // 
