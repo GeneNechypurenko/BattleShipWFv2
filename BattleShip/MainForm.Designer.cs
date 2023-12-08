@@ -95,7 +95,9 @@
             ClientSize = new Size(742, 403);
             Controls.Add(buttonPanel);
             Controls.Add(startScreenPanel);
+            DoubleBuffered = true;
             ForeColor = Color.Ivory;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "MainForm";
             Opacity = 0.98D;

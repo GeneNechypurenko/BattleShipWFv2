@@ -79,7 +79,7 @@ namespace BattleShip.ViewModel
         public static void Shot(Player player, PictureBox clickedPictureBox, Color markColor, Color restoreBoardColor)
         {
             string[] coordinates = clickedPictureBox.Tag.ToString().Split(':');
-            Font font = new Font("Segoe UI", 20, FontStyle.Bold);
+            Font font = new Font("Segoe UI", 32, FontStyle.Bold);
 
             if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int i) && int.TryParse(coordinates[1], out int j))
             {
@@ -91,10 +91,10 @@ namespace BattleShip.ViewModel
                         using (Brush brush = new SolidBrush(markColor))
                         {
                             clickedPictureBox.BackColor = restoreBoardColor;
-                            float x = (clickedPictureBox.Width - g.MeasureString("X", font).Width) / 2;
-                            float y = (clickedPictureBox.Height - g.MeasureString("X", font).Height) / 2;
+                            float x = (clickedPictureBox.Width - g.MeasureString("⨯", font).Width) / 2;
+                            float y = (clickedPictureBox.Height - g.MeasureString("⨯", font).Height) / 2 - 3;
                             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-                            g.DrawString("X", font, brush, new PointF(x, y));
+                            g.DrawString("⨯", font, brush, new PointF(x, y));
                         }
                     }
                 }
@@ -105,10 +105,10 @@ namespace BattleShip.ViewModel
                     {
                         using (Brush brush = new SolidBrush(markColor))
                         {
-                            float x = (clickedPictureBox.Width - g.MeasureString("O", font).Width) / 2;
-                            float y = (clickedPictureBox.Height - g.MeasureString("O", font).Height) / 2;
+                            float x = (clickedPictureBox.Width - g.MeasureString("∙", font).Width) / 2 - 1;
+                            float y = (clickedPictureBox.Height - g.MeasureString("∙", font).Height) / 2 - 3;
                             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-                            g.DrawString("O", font, brush, new PointF(x, y));
+                            g.DrawString("∙", font, brush, new PointF(x, y));
                         }
                     }
                 }

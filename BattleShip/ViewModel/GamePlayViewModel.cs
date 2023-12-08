@@ -80,7 +80,7 @@ namespace BattleShip.ViewModel
 
                     if (targetPictureBox != null)
                     {
-                        await Task.Delay(2000);
+                        await Task.Delay(1500);
                         BoardRenderer.Shot(player, targetPictureBox, Color.DarkSlateGray, Color.LimeGreen);
                         shotPerformed = true;
                     }
