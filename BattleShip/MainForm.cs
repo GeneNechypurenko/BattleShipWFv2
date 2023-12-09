@@ -51,12 +51,5 @@ namespace BattleShip
                 gamePlayUserControl.Show();
             };
         }
-
-        private void ShipsSetupUserControl_ShipSetupCompleted(object sender, EventArgs e)
-        {
-            shipsSetupUserControl.ShipSetupCompleted -= ShipsSetupUserControl_ShipSetupCompleted;
-            shipsSetupUserControl.Dispose();
-            shipsSetupUserControl = null;
-        }
     }
 }

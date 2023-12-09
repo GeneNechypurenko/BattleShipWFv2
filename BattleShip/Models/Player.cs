@@ -72,7 +72,6 @@ namespace BattleShip.Models
             }
         }
         public Player(Board board) => Board = board;
-        public bool AreAllShipsSet() => LincoreSet > 0 && FregateSet > 0 && CorvetteSet > 0 && BriggSet > 0;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

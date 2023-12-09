@@ -97,13 +97,6 @@ namespace BattleShip.View
         {
             PictureBox clickedPictureBox = sender as PictureBox;
             viewModel.SetPlayerShip(player, clickedPictureBox);
-
-            if (player.AreAllShipsSet() && computer.AreAllShipsSet())
-            {
-                ShipSetupCompleted?.Invoke(this, EventArgs.Empty);
-            }
         }
-
-        public event EventHandler ShipSetupCompleted;
     }
 }
