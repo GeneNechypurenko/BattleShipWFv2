@@ -23,26 +23,6 @@ namespace BattleShip.ViewModel
             this.gamePlay = gamePlay;
             //this.mainForm = mainForm;
         }
-        public void FirstTurnRoll()
-        {
-            Random rnd = new Random();
-
-            int result = rnd.Next(0, 2);
-
-            player.IsTurn = (result == 0);
-            computer.IsTurn = (result == 1);
-
-            if (player.IsTurn)
-            {
-                gamePlay.PlayerTurnLabel.Text = "YOUR TURN NOW!";
-                gamePlay.ComputerTurnLabel.Text = "";
-            }
-            else if (computer.IsTurn)
-            {
-                gamePlay.PlayerTurnLabel.Text = "";
-                gamePlay.ComputerTurnLabel.Text = "COMPUTER TURN!";
-            }
-        }
         public void PassTurn()
         {
             if (player.IsTurn)
@@ -60,14 +40,14 @@ namespace BattleShip.ViewModel
                 gamePlay.ComputerTurnLabel.Text = "";
             }
         }
-        public async void PerformComputerMove()
+        public async Task PerformComputerMove()
         {
             Random rnd = new Random();
 
             int targetX;
             int targetY;
 
-            bool shotPerformed = false;
+            bool isShotPerformed = false;
 
             do
             {
@@ -82,10 +62,10 @@ namespace BattleShip.ViewModel
                     {
                         await Task.Delay(1500);
                         BoardRenderer.Shot(player, targetPictureBox, Color.DarkSlateGray, Color.LimeGreen);
-                        shotPerformed = true;
+                        isShotPerformed = true;
                     }
                 }
-            } while (!shotPerformed);
+            } while (!isShotPerformed);
 
             PassTurn();
         }

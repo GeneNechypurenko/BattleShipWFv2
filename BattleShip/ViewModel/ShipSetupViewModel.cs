@@ -15,7 +15,6 @@ namespace BattleShip.ViewModel
         private Player computer;
         private ShipsSetupUserControl shipSetup;
         private MainForm mainForm;
-
         public ShipSetupViewModel(Player player, Player computer, ShipsSetupUserControl shipSetup, MainForm mainForm)
         {
             this.mainForm = mainForm;

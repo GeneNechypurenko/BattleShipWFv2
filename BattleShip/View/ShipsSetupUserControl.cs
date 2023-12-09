@@ -12,7 +12,6 @@ namespace BattleShip.View
         private Player computer;
 
         private ShipSetupViewModel viewModel;
-
         public RadioButton LincoreRadioButton { get => lincoreRadioButton; }
         public RadioButton FregateRadioButton { get => fregateRadioButton; }
         public RadioButton CorvetteRadioButton { get => corvetteRadioButton; }
@@ -48,7 +47,6 @@ namespace BattleShip.View
                 {
                     shipSelectedLabel.Text = $"SHIP SELECTED {selectedRadioButton.Tag.ToString()}";
                     selectedRadioButton.CheckedChanged += SelectedRadioButton_CheckedChanged;
-                    selectedRadioButton.EnabledChanged += SelectedRadioButton_EnabledChanged;
                 }
             }
 
@@ -74,17 +72,6 @@ namespace BattleShip.View
                 orientationSelectedLabel.Text = "ORIENTATION HORIZONTAL";
             }
         }
-        private void SelectedRadioButton_EnabledChanged(object? sender, EventArgs e)
-        {
-            RadioButton selectedRadioButton = sender as RadioButton;
-
-            if (selectedRadioButton.Checked && !selectedRadioButton.Enabled)
-            {
-                shipSelectedLabel.ForeColor = Color.Crimson;
-                shipSelectedLabel.Text = $"NO SHIP SELECTED";
-            }
-        }
-
         private void SelectedRadioButton_CheckedChanged(object? sender, EventArgs e)
         {
             foreach (RadioButton selectedRadioButton in fleetGroupBox.Controls.OfType<RadioButton>())
@@ -99,16 +86,24 @@ namespace BattleShip.View
         }
         private void ShipsSetupUserControl_Paint(object? sender, PaintEventArgs e)
         {
-            Graphics graphics = e.Graphics;
-
-            BoardRenderer.DrawBorderSideString(190, 0, Brushes.LimeGreen, e.Graphics, this.Font);
-            BoardRenderer.AddPictureBoxes(cellsFlowLayoutPanel, Color.LimeGreen, CellPictureBox_Click);
-            BoardRenderer.DrawBorderTopString(190, 0, Brushes.LimeGreen, e.Graphics, this.Font);
+            using (Graphics graphics = e.Graphics)
+            {
+                BoardRenderer.DrawBorderSideString(190, 0, Brushes.LimeGreen, e.Graphics, this.Font);
+                BoardRenderer.AddPictureBoxes(cellsFlowLayoutPanel, Color.LimeGreen, CellPictureBox_Click);
+                BoardRenderer.DrawBorderTopString(190, 0, Brushes.LimeGreen, e.Graphics, this.Font);
+            };
         }
         private void CellPictureBox_Click(object sender, EventArgs e)
         {
             PictureBox clickedPictureBox = sender as PictureBox;
             viewModel.SetPlayerShip(player, clickedPictureBox);
+
+            if (player.AreAllShipsSet() && computer.AreAllShipsSet())
+            {
+                ShipSetupCompleted?.Invoke(this, EventArgs.Empty);
+            }
         }
+
+        public event EventHandler ShipSetupCompleted;
     }
 }

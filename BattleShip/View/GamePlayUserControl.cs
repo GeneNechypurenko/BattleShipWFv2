@@ -53,17 +53,18 @@ namespace BattleShip.View
         }
         private void GamePlayUserControl_Paint(object? sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
+            using (Graphics g = e.Graphics)
+            {
+                BoardRenderer.DrawBorderTopString(20, 20, Brushes.LimeGreen, e.Graphics, this.Font);
+                BoardRenderer.AddPictureBoxes(playerFlowLayoutPanel, Color.LimeGreen, CellPictureBox_Click);
+                BoardRenderer.DrawBorderSideString(20, 20, Brushes.LimeGreen, e.Graphics, this.Font);
+                BoardRenderer.SetPlayerBoard(player, playerFlowLayoutPanel, Color.DarkSlateGray);
 
-            BoardRenderer.DrawBorderTopString(20, 20, Brushes.LimeGreen, e.Graphics, this.Font);
-            BoardRenderer.AddPictureBoxes(playerFlowLayoutPanel, Color.LimeGreen, CellPictureBox_Click);
-            BoardRenderer.DrawBorderSideString(20, 20, Brushes.LimeGreen, e.Graphics, this.Font);
-            BoardRenderer.SetPlayerBoard(player, playerFlowLayoutPanel, Color.DarkSlateGray);
-
-            BoardRenderer.DrawBorderTopString(360, 20, Brushes.Crimson, e.Graphics, this.Font);
-            BoardRenderer.AddPictureBoxes(computerFlowLayoutPanel, Color.Crimson, CellPictureBox_Click);
-            BoardRenderer.DrawBorderSideString(690, 20, Brushes.Crimson, e.Graphics, this.Font);
-            //BoardRenderer.SetPlayerBoard(computer, computerFlowLayoutPanel, Color.DarkSlateGray);
+                BoardRenderer.DrawBorderTopString(360, 20, Brushes.Crimson, e.Graphics, this.Font);
+                BoardRenderer.AddPictureBoxes(computerFlowLayoutPanel, Color.Crimson, CellPictureBox_Click);
+                BoardRenderer.DrawBorderSideString(690, 20, Brushes.Crimson, e.Graphics, this.Font);
+                //BoardRenderer.SetPlayerBoard(computer, computerFlowLayoutPanel, Color.DarkSlateGray);
+            };
         }
         private void CellPictureBox_Click(object? sender, EventArgs e)
         {

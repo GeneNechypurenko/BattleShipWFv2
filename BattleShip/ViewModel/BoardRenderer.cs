@@ -57,25 +57,22 @@ namespace BattleShip.ViewModel
         }
         public static void SetPlayerBoard(Player player, FlowLayoutPanel playerFlowLayoutPanel, Color color)
         {
-            for (int i = 0; i < _cells; i++)
+            foreach (Control control in playerFlowLayoutPanel.Controls)
             {
-                for (int j = 0; j < _cells; j++)
+                if (control is PictureBox cellPictureBox)
                 {
-                    if (player.Board.Board2d[i, j] == 1)
+                    string[] coordinates = cellPictureBox.Tag.ToString().Split(':');
+                    if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int i) && int.TryParse(coordinates[1], out int j))
                     {
-                        int index = i * _cells + j;
-
-                        if (index < playerFlowLayoutPanel.Controls.Count)
+                        if (player.Board.Board2d[i, j] == 1)
                         {
-                            if (playerFlowLayoutPanel.Controls[index] is PictureBox cellPictureBox)
-                            {
-                                cellPictureBox.BackColor = color;
-                            }
+                            cellPictureBox.BackColor = color;
                         }
                     }
                 }
             }
         }
+
         public static void Shot(Player player, PictureBox clickedPictureBox, Color markColor, Color restoreBoardColor)
         {
             string[] coordinates = clickedPictureBox.Tag.ToString().Split(':');
@@ -85,35 +82,32 @@ namespace BattleShip.ViewModel
             {
                 if (player.Board.Board2d[i, j] == 1)
                 {
-                    clickedPictureBox.Image = new Bitmap(clickedPictureBox.Width, clickedPictureBox.Height);
-                    using (Graphics g = Graphics.FromImage(clickedPictureBox.Image))
-                    {
-                        using (Brush brush = new SolidBrush(markColor))
-                        {
-                            clickedPictureBox.BackColor = restoreBoardColor;
-                            float x = (clickedPictureBox.Width - g.MeasureString("⨯", font).Width) / 2;
-                            float y = (clickedPictureBox.Height - g.MeasureString("⨯", font).Height) / 2 - 3;
-                            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-                            g.DrawString("⨯", font, brush, new PointF(x, y));
-                        }
-                    }
+                    clickedPictureBox.Image = CreateMarkedImage(markColor, restoreBoardColor, "⨯", font, clickedPictureBox.Width, clickedPictureBox.Height);
                 }
                 else if (player.Board.Board2d[i, j] == 0)
                 {
-                    clickedPictureBox.Image = new Bitmap(clickedPictureBox.Width, clickedPictureBox.Height);
-                    using (Graphics g = Graphics.FromImage(clickedPictureBox.Image))
-                    {
-                        using (Brush brush = new SolidBrush(markColor))
-                        {
-                            float x = (clickedPictureBox.Width - g.MeasureString("∙", font).Width) / 2 - 1;
-                            float y = (clickedPictureBox.Height - g.MeasureString("∙", font).Height) / 2 - 3;
-                            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-                            g.DrawString("∙", font, brush, new PointF(x, y));
-                        }
-                    }
+                    clickedPictureBox.Image = CreateMarkedImage(markColor, restoreBoardColor, "∙", font, clickedPictureBox.Width, clickedPictureBox.Height);
                 }
                 player.Board.Board2d[i, j] = 2;
             }
+        }
+
+        private static Bitmap CreateMarkedImage(Color markColor, Color restoreBoardColor, string mark, Font font, int width, int height)
+        {
+            Bitmap image = new Bitmap(width, height);
+
+            using (Graphics g = Graphics.FromImage(image))
+            {
+                g.Clear(restoreBoardColor);
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+
+                using (Brush brush = new SolidBrush(markColor))
+                {
+                    g.DrawString(mark, font, brush, new PointF((width - g.MeasureString(mark, font).Width) / 2, (height - g.MeasureString(mark, font).Height) / 2 - 3));
+                }
+            }
+
+            return image;
         }
     }
 }
