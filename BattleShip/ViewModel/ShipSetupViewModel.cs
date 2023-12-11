@@ -1,41 +1,32 @@
 ﻿using BattleShip.Models;
 using BattleShip.View;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleShip.ViewModel
 {
     public class ShipSetupViewModel
     {
-        private Player player;
-        private Player computer;
         private ShipsSetupUserControl shipSetup;
         private MainForm mainForm;
         public ShipSetupViewModel(Player player, Player computer, ShipsSetupUserControl shipSetup, MainForm mainForm)
         {
             this.mainForm = mainForm;
             this.shipSetup = shipSetup;
-            this.player = player;
-            this.computer = computer;
         }
         public void InitiateComputersShips(Player computer)
         {
             computer.Board.Ships = new ObservableCollection<Ship>
             {
-                new Ship {Size = 4},
-                new Ship {Size = 3},
-                new Ship {Size = 3},
-                new Ship {Size = 2},
-                new Ship {Size = 2},
-                new Ship {Size = 2},
-                new Ship {Size = 1},
-                new Ship {Size = 1},
-                new Ship {Size = 1},
-                new Ship {Size = 1},
+                new Ship(4),
+                new Ship(3),
+                new Ship(3),
+                new Ship(2),
+                new Ship(2),
+                new Ship(2),
+                new Ship(1),
+                new Ship(1),
+                new Ship(1),
+                new Ship(1),
             };
         }
         public void SetComputerBoard(Player computer)
@@ -88,25 +79,25 @@ namespace BattleShip.ViewModel
         {
             if (shipSetup.LincoreRadioButton.Checked && player.LincoreSet != 0)
             {
-                Ship ship = new Ship { Size = 4, IsSunk = false, IsVertical = false };
+                Ship ship = new Ship(4) { IsSunk = false, IsVertical = false };
                 PlacePlayerShipOnBoard(player, ship, clickedPictureBox);
                 if (player.LincoreSet == 0) { shipSetup.LincoreRadioButton.Enabled = false; }
             }
             else if (shipSetup.FregateRadioButton.Checked && player.FregateSet != 0)
             {
-                Ship ship = new Ship { Size = 3, IsSunk = false, IsVertical = false };
+                Ship ship = new Ship(3) { IsSunk = false, IsVertical = false };
                 PlacePlayerShipOnBoard(player, ship, clickedPictureBox);
                 if (player.FregateSet == 0) { shipSetup.FregateRadioButton.Enabled = false; }
             }
             else if (shipSetup.CorvetteRadioButton.Checked && player.CorvetteSet != 0)
             {
-                Ship ship = new Ship { Size = 2, IsSunk = false, IsVertical = false };
+                Ship ship = new Ship(2) { IsSunk = false, IsVertical = false };
                 PlacePlayerShipOnBoard(player, ship, clickedPictureBox);
                 if (player.CorvetteSet == 0) { shipSetup.CorvetteRadioButton.Enabled = false; }
             }
             else if (shipSetup.BriggRadioButton.Checked && player.BriggSet != 0)
             {
-                Ship ship = new Ship { Size = 1, IsSunk = false, IsVertical = false };
+                Ship ship = new Ship(1) { IsSunk = false, IsVertical = false };
                 PlacePlayerShipOnBoard(player, ship, clickedPictureBox);
                 if (player.BriggSet == 0) { shipSetup.BriggRadioButton.Enabled = false; }
             }

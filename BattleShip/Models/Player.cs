@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace BattleShip.Models
 {
     public class Player : INotifyPropertyChanged
     {
         public bool IsTurn { get; set; }
-        //private bool _isTurn;
-        //public bool IsTurn
-        //{
-        //    get => _isTurn;
-        //    set
-        //    {
-        //        _isTurn = value;
-        //        OnPropertyChanged(nameof(IsTurn));
-        //    }
-        //}
-        public int ShipCount { get; } = 10;
+
+        private int _shipCount = 10;
+        public int ShipCount
+        {
+            get => _shipCount;
+            set
+            {
+                _shipCount = value;
+                OnPropertyChanged(nameof(ShipCount));
+            }
+        }
         private int _lincoreSet = 1;
         public int LincoreSet
         {

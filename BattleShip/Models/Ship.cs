@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace BattleShip.Models
 {
@@ -23,8 +18,8 @@ namespace BattleShip.Models
                 OnPropertyChanged(nameof(IsVertical));
             }
         }
-        private bool _isHit;
-        public bool IsHit
+        private bool[] _isHit;
+        public bool[] IsHit
         {
             get => _isHit;
             set
@@ -63,10 +58,12 @@ namespace BattleShip.Models
                 OnPropertyChanged(nameof(PosY));
             }
         }
-        public Ship()
+        public Ship(int size)
         {
-            _posX = new int[Size];
-            _posY = new int[Size];
+            Size = size;
+            PosX = new int[size];
+            PosY = new int[size];
+            IsHit = new bool[size];
         }
     }
 }

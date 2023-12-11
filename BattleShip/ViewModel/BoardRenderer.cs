@@ -1,12 +1,4 @@
 ﻿using BattleShip.Models;
-using Microsoft.VisualBasic.Devices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleShip.ViewModel
 {
@@ -72,27 +64,7 @@ namespace BattleShip.ViewModel
                 }
             }
         }
-
-        public static void Shot(Player player, PictureBox clickedPictureBox, Color markColor, Color restoreBoardColor)
-        {
-            string[] coordinates = clickedPictureBox.Tag.ToString().Split(':');
-            Font font = new Font("Segoe UI", 32, FontStyle.Bold);
-
-            if (coordinates.Length == 2 && int.TryParse(coordinates[0], out int i) && int.TryParse(coordinates[1], out int j))
-            {
-                if (player.Board.Board2d[i, j] == 1)
-                {
-                    clickedPictureBox.Image = CreateMarkedImage(markColor, restoreBoardColor, "⨯", font, clickedPictureBox.Width, clickedPictureBox.Height);
-                }
-                else if (player.Board.Board2d[i, j] == 0)
-                {
-                    clickedPictureBox.Image = CreateMarkedImage(markColor, restoreBoardColor, "∙", font, clickedPictureBox.Width, clickedPictureBox.Height);
-                }
-                player.Board.Board2d[i, j] = 2;
-            }
-        }
-
-        private static Bitmap CreateMarkedImage(Color markColor, Color restoreBoardColor, string mark, Font font, int width, int height)
+        public static Bitmap CreateMarkedImage(Color markColor, Color restoreBoardColor, string mark, Font font, int width, int height)
         {
             Bitmap image = new Bitmap(width, height);
 
